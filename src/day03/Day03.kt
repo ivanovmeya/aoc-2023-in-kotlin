@@ -1,7 +1,3 @@
-package Day03
-
-import println
-import readInput
 
 fun main() {
 
