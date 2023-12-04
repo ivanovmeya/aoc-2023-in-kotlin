@@ -89,7 +89,7 @@ fun main() {
         //traverse all matrix
         input.forEachIndexed { row, rowValue ->
             rowValue.forEachIndexed { column, ch ->
-                if (!ch.isDigit() && ch != '.') {
+                if (ch == '*') {
                     //we found a symbol, to be the gear it should have exactly 2 numbers connected.
 
                     //save id's of already added numbers
