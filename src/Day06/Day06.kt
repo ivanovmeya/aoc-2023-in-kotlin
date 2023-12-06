@@ -54,32 +54,16 @@ fun main() {
         return start
     }
 
-    fun lowerBoundIndex(startIndex: Long, totalTime: Long, record: Long): Long {
-        var start = startIndex
-        var end = totalTime
-
-        while (start < end) {
-            //need (+1) to avoid stucking in the loop
-            val mid = start + (end - start + 1) / 2
-            val d = distance(mid, totalTime)
-            when {
-                d <= record -> end = mid - 1
-                else -> start = mid
-            }
-        }
-        return start
-    }
-
     fun numberOfWaysToBeatRecord(totalTime: Long, record: Long): Long {
         //binary search lower or upper bound to find first that beats the record
         //distance func is parabola -> we have 2 sorted parts: ascending [0, mid] and descending [mid+1, total]
         //in both parts use binary search upper bound to found first that beats record
+        //one notice: parabola is symmetric around it peak(mid) point -> calc ascending part and multiply by 2
 
         val midTime = totalTime / 2
         val numberOfWaysInAscendingPart = midTime - upperBoundIndex(midTime, totalTime, record) + 1
-        val numberOfWaysInDescendingPart = lowerBoundIndex(midTime+1, totalTime, record) - (midTime+1) + 1
 
-        return numberOfWaysInAscendingPart + numberOfWaysInDescendingPart
+        return if (totalTime % 2 != 0L) 2* numberOfWaysInAscendingPart else 2*numberOfWaysInAscendingPart -1
     }
 
     fun part1(input: List<String>): Long {
@@ -106,5 +90,9 @@ fun main() {
 
     val input = readInput("Day06", false)
     part1(input).println()
+
+    check(part2(input) == 27363861L)
     part2(input).println()
+
+
 }
