@@ -114,7 +114,7 @@ fun main() {
                     1 -> HandType.HighCard
                     else -> HandType.HighCard
                 }
-                else -> throw IllegalStateException("have wrong jokers $jokers, str = ${handStr}")
+                else -> throw IllegalStateException("have wrong jokers $jokers, str = $handStr")
             }
 
             Hand(handStr, handTypeJ, bid.toInt())
